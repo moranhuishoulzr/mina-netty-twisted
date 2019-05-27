@@ -29,11 +29,9 @@ public class TcpServer {
 }
 
 class TcpServerHandle extends IoHandlerAdapter {
-
     @Override
     public void messageReceived(IoSession session, Object message)
             throws Exception {
-
         // 假设这里有个变态的SQL要执行3秒
         Thread.sleep(3000);
     }

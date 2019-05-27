@@ -28,10 +28,8 @@ import java.security.spec.PKCS8EncodedKeySpec;
 public class MinaServer {
 
     public static void main(String[] args) throws Exception {
-
-
-        String certPath = "/Users/wucao/Desktop/ssl/cert.crt";  // 证书
-        String privateKeyPath = "/Users/wucao/Desktop/ssl/private.der";  // 私钥
+        String certPath = "cert.crt";  // 证书
+        String privateKeyPath = "private.der";  // 私钥
 
         // 证书
         // https://docs.oracle.com/javase/7/docs/api/java/security/cert/X509Certificate.html
