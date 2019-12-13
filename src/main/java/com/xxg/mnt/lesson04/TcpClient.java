@@ -23,14 +23,14 @@ public class TcpClient {
             out = socket.getOutputStream();
             in = socket.getInputStream();
 
-            // è¯·æ±‚æœåŠ¡å™¨
-            String data = "æˆ‘æ˜¯å®¢æˆ·ç«¯";
+            // ÇëÇó·þÎñÆ÷
+            String data = "ÎÒÊÇ¿Í»§¶Ë";
             byte[] outputBytes = data.getBytes("UTF-8");
             out.write(LittleEndian.toLittleEndian(outputBytes.length)); // write header
             out.write(outputBytes); // write body
             out.flush();
 
-            // èŽ·å–å“åº”
+            // »ñÈ¡ÏìÓ¦
             byte[] inputBytes = new byte[1024];
             int length = in.read(inputBytes);
             if(length >= 4) {
@@ -43,7 +43,7 @@ public class TcpClient {
             }
 
         } finally {
-            // å…³é—­è¿žæŽ¥
+            // ¹Ø±ÕÁ¬½Ó
             in.close();
             out.close();
             socket.close();

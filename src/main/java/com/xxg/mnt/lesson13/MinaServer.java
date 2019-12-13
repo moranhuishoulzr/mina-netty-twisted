@@ -63,21 +63,13 @@ class TcpServerHandle extends IoHandlerAdapter {
             System.out.println(temp);
         }
 
-//        if (message instanceof byte[]) {
-//            String s = new String((byte[]) message, Charset.forName("UTF-8"));
-//            System.out.println(s);
-//
-//        } else (message instanceof char[]) {
-//            String ss = new String((char[]) message);
-//            System.out.println(ss);
-//        }
-//        String line = (String) message;
-//        System.out.println("messageReceived:" + line);
     }
 
     @Override
     public void sessionCreated(IoSession session) throws Exception {
         System.out.println("sessionCreated");
+        /** 启用加密过滤通知 **/
+        session.setAttribute(SslFilter.USE_NOTIFICATION);
     }
 
     @Override

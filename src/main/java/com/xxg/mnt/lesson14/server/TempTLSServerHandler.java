@@ -40,7 +40,7 @@ public class TempTLSServerHandler extends IoHandlerAdapter {
 		} else {
 			msg = (String) message;
 		}
-		System.out.println("[NIO Server Received]>> : " + msg);
+		System.out.println("Received:  " + msg);
 		if ("Hello".equalsIgnoreCase(msg)) {
 			session.write("Hello SSL");
 		} else if ("Client SSL Finished".equalsIgnoreCase(msg)) {
@@ -55,8 +55,7 @@ public class TempTLSServerHandler extends IoHandlerAdapter {
 	}
 
 	public void messageSent(IoSession session, Object message) throws Exception {
-		System.out.println("[NIO Server]>> messageSent");
-		System.out.println("[NIO Server messageSent]>> : " + (String) message);
+		System.out.println("send MSG: "+message);
 	}
 
 }

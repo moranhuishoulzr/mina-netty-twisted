@@ -18,8 +18,8 @@ public class SslClient {
 
     public static void main(String args[]) throws Exception {
 
-        // å®¢æˆ·ç«¯ä¿¡ä»»æ”¹è¯ä¹¦ï¼Œå°†ç”¨äºæ ¡éªŒæœåŠ¡å™¨ä¼ è¿‡æ¥çš„è¯ä¹¦çš„åˆæ³•æ€§
-        String certPath = "/Users/wucao/Desktop/ssl/cert.crt";
+        // ¿Í»§¶ËĞÅÈÎ¸ÃÖ¤Êé£¬½«ÓÃÓÚĞ£Ñé·şÎñÆ÷´«¹ıÀ´µÄÖ¤ÊéµÄºÏ·¨ĞÔ
+        String certPath = "F:\\code+ziliao\\¡¶MINA¡¢Netty¡¢TwistedÒ»ÆğÑ§¡·ÏµÁĞ½Ì³ÌÔ´Âë\\mina-netty-twisted\\src\\main\\resources\\cert.crt";
         InputStream inStream = null;
         Certificate certificate = null;
         try {
@@ -31,7 +31,6 @@ public class SslClient {
                 inStream.close();
             }
         }
-
         KeyStore ks = KeyStore.getInstance(KeyStore.getDefaultType());
         ks.load(null, null);
         ks.setCertificateEntry("cert", certificate);
@@ -44,6 +43,7 @@ public class SslClient {
 
         SSLSocketFactory socketFactory = sslContext.getSocketFactory();
 
+
         Socket socket = null;
         OutputStream out = null;
 
@@ -52,14 +52,14 @@ public class SslClient {
             socket = socketFactory.createSocket("localhost", 8080);
             out = socket.getOutputStream();
 
-            // è¯·æ±‚æœåŠ¡å™¨
-            String lines = "åºŠå‰æ˜æœˆå…‰\r\nç–‘æ˜¯åœ°ä¸Šéœœ\r\nä¸¾å¤´æœ›æ˜æœˆ\r\nä½å¤´æ€æ•…ä¹¡\r\n";
+            // ÇëÇó·şÎñÆ÷
+            String lines = "´²Ç°Ã÷ÔÂ¹â\r\nÒÉÊÇµØÉÏËª\r\n¾ÙÍ·ÍûÃ÷ÔÂ\r\nµÍÍ·Ë¼¹ÊÏç\r\n";
             byte[] outputBytes = lines.getBytes("UTF-8");
             out.write(outputBytes);
             out.flush();
 
         } finally {
-            // å…³é—­è¿æ¥
+            // ¹Ø±ÕÁ¬½Ó
             out.close();
             socket.close();
         }

@@ -15,7 +15,7 @@ public class MyNettyEncoder extends MessageToByteEncoder<String> {
 
         byte[] bytes = msg.getBytes("UTF-8");
         int length = bytes.length;
-        byte[] header = LittleEndian.toLittleEndian(length); // int鎸夊皬瀛楄妭搴忚浆瀛楄妭鏁扮粍
+        byte[] header = LittleEndian.toLittleEndian(length); // int按小字节序转字节数组
         out.writeBytes(header); // write header
         out.writeBytes(bytes); // write body
     }

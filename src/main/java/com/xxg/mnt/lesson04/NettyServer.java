@@ -24,7 +24,7 @@ public class NettyServer {
                                 throws Exception {
                             ChannelPipeline pipeline = ch.pipeline();
 
-                            // åŠ ä¸Šè‡ªå·±çš„Encoderå’ŒDecoder
+                            // ¼ÓÉÏ×Ô¼ºµÄEncoderºÍDecoder
                             pipeline.addLast(new MyNettyDecoder());
                             pipeline.addLast(new MyNettyEncoder());
 
@@ -42,16 +42,16 @@ public class NettyServer {
 
 class TcpServerHandler extends ChannelInboundHandlerAdapter {
 
-    // æ¥æ”¶åˆ°æ–°çš„æ•°æ®
+    // ½ÓÊÕµ½ĞÂµÄÊı¾İ
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
 
-        // MyNettyDecoderå°†æ¥æ”¶åˆ°çš„æ•°æ®ç”±ByteBufè½¬ä¸ºString
+        // MyNettyDecoder½«½ÓÊÕµ½µÄÊı¾İÓÉByteBuf×ªÎªString
         String message = (String) msg;
         System.out.println("channelRead:" + message);
 
-        // MyNettyEncoderå°†writeçš„å­—ç¬¦ä¸²æ·»åŠ äº†ä¸€ä¸ªå°å­—èŠ‚åºHeaderå¹¶è½¬ä¸ºå­—èŠ‚ç 
-        ctx.writeAndFlush("æ”¶åˆ°");
+        // MyNettyEncoder½«writeµÄ×Ö·û´®Ìí¼ÓÁËÒ»¸öĞ¡×Ö½ÚĞòHeader²¢×ªÎª×Ö½ÚÂë
+        ctx.writeAndFlush("ÊÕµ½");
     }
 
     @Override

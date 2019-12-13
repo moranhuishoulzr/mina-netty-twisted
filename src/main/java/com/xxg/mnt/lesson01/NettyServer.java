@@ -41,16 +41,16 @@ public class NettyServer {
 
 class TcpServerHandler extends ChannelInboundHandlerAdapter {
 
-    // æ¥æ”¶åˆ°æ–°çš„æ•°æ®
+    // ½ÓÊÕµ½ĞÂµÄÊı¾İ
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws UnsupportedEncodingException {
         try {
-            // æ¥æ”¶å®¢æˆ·ç«¯çš„æ•°æ®
+            // ½ÓÊÕ¿Í»§¶ËµÄÊı¾İ
             ByteBuf in = (ByteBuf) msg;
             System.out.println("channelRead:" + in.toString(CharsetUtil.UTF_8));
 
-            // å‘é€åˆ°å®¢æˆ·ç«¯
-            byte[] responseByteArray = "ä½ å¥½".getBytes("UTF-8");
+            // ·¢ËÍµ½¿Í»§¶Ë
+            byte[] responseByteArray = "ÄãºÃ".getBytes("UTF-8");
             ByteBuf out = ctx.alloc().buffer(responseByteArray.length);
             out.writeBytes(responseByteArray);
             ctx.writeAndFlush(out);
@@ -66,7 +66,7 @@ class TcpServerHandler extends ChannelInboundHandlerAdapter {
     }
 
     @Override
-    public void channelInactive(ChannelHandlerContext ctx){
+    public void channelInactive(ChannelHandlerContext ctx) {
         System.out.println("channelInactive");
     }
 

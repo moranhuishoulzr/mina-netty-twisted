@@ -9,12 +9,16 @@ import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.filter.codec.textline.LineDelimiter;
 import org.apache.mina.filter.codec.textline.TextLineCodecFactory;
 import org.apache.mina.filter.executor.ExecutorFilter;
+import org.apache.mina.filter.ssl.BogusTrustManagerFactory;
+import org.apache.mina.filter.ssl.KeyStoreFactory;
 import org.apache.mina.filter.ssl.SslFilter;
 import org.apache.mina.transport.socket.nio.NioSocketConnector;
 
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
 import java.net.InetSocketAddress;
 import java.nio.charset.Charset;
+import java.security.KeyStore;
 import java.util.concurrent.Executors;
 
 /**
@@ -26,15 +30,22 @@ import java.util.concurrent.Executors;
  */
 public class MinaClient {
     public static void main(String[] args) throws Exception {
-        SSLContext sslContext = Client.getSSLContext();
+
         NioSocketConnector nioConnector = new NioSocketConnector();
         nioConnector.setDefaultRemoteAddress(new InetSocketAddress("127.0.0.1", 8084));
         nioConnector.getSessionConfig().setKeepAlive(true);
         DefaultIoFilterChainBuilder chain = nioConnector.getFilterChain();
+
+        SSLContext sslContext = Client.getSSLContext();
+        SslFilter sslFilter = new SslFilter(sslContext);
+        sslFilter.setUseClientMode(true);
+//        SSLSession sslSession = sslFilter.getSslSession();
+
         chain.addLast("ssl", new SslFilter(sslContext));  // SslFilter需要放在最前面
+
         chain.addLast("codec", new ProtocolCodecFilter(new TextLineCodecFactory(Charset.forName("UTF-8"),
                 LineDelimiter.WINDOWS.getValue(),
-                LineDelimiter. WINDOWS.getValue()  )));
+                LineDelimiter.WINDOWS.getValue())));
         nioConnector.getFilterChain().addLast("_App_threadPool", new ExecutorFilter(Executors.newCachedThreadPool()));
         nioConnector.setHandler(new ClientHandle());
         ConnectFuture future = nioConnector.connect();

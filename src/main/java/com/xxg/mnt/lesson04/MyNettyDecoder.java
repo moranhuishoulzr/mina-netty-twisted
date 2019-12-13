@@ -14,25 +14,25 @@ public class MyNettyDecoder extends ByteToMessageDecoder {
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
 
-        // å¦‚æœæ²¡æœ‰æ¥æ”¶å®ŒHeaderéƒ¨åˆ†ï¼ˆ4å­—èŠ‚ï¼‰ï¼Œç›´æ¥é€€å‡ºè¯¥æ–¹æ³•
+        // Èç¹ûÃ»ÓĞ½ÓÊÕÍêHeader²¿·Ö£¨4×Ö½Ú£©£¬Ö±½ÓÍË³ö¸Ã·½·¨
         if(in.readableBytes() >= 4) {
 
-            // æ ‡è®°å¼€å§‹ä½ç½®ï¼Œå¦‚æœä¸€æ¡æ¶ˆæ¯æ²¡ä¼ è¾“å®Œæˆåˆ™è¿”å›åˆ°è¿™ä¸ªä½ç½®
+            // ±ê¼Ç¿ªÊ¼Î»ÖÃ£¬Èç¹ûÒ»ÌõÏûÏ¢Ã»´«ÊäÍê³ÉÔò·µ»Øµ½Õâ¸öÎ»ÖÃ
             in.markReaderIndex();
 
             byte[] bytes = new byte[4];
-            in.readBytes(bytes); // è¯»å–4å­—èŠ‚çš„Header
+            in.readBytes(bytes); // ¶ÁÈ¡4×Ö½ÚµÄHeader
 
-            int bodyLength = LittleEndian.getLittleEndianInt(bytes); // headeræŒ‰å°å­—èŠ‚åºè½¬int
+            int bodyLength = LittleEndian.getLittleEndianInt(bytes); // header°´Ğ¡×Ö½ÚĞò×ªint
 
-            // å¦‚æœbodyæ²¡æœ‰æ¥æ”¶å®Œæ•´
+            // Èç¹ûbodyÃ»ÓĞ½ÓÊÕÍêÕû
             if(in.readableBytes() < bodyLength) {
-                in.resetReaderIndex(); // ByteBufå›åˆ°æ ‡è®°ä½ç½®
+                in.resetReaderIndex(); // ByteBuf»Øµ½±ê¼ÇÎ»ÖÃ
             } else {
                 byte[] bodyBytes = new byte[bodyLength];
                 in.readBytes(bodyBytes);
                 String body = new String(bodyBytes, "UTF-8");
-                out.add(body); // è§£æå‡ºä¸€æ¡æ¶ˆæ¯
+                out.add(body); // ½âÎö³öÒ»ÌõÏûÏ¢
             }
         }
     }

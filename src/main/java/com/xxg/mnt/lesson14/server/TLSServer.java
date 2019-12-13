@@ -13,9 +13,6 @@ import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
 
 
 public class TLSServer {
-
-	private static final int PORT = 50003;
-
 	public static void main(String[] args) throws Exception {
 		/** 创建服务器端连接器 **/
 		SocketAcceptor acceptor = new NioSocketAcceptor();
@@ -31,7 +28,7 @@ public class TLSServer {
 		/** 设置事件处理器 **/
 		acceptor.setHandler(new TLSServerHandler());
 		/** 服务绑定到此端口号 **/
-		acceptor.bind(new InetSocketAddress(PORT));
-		System.out.println("服务器在 [" + PORT + "] 等待连接...");
+		acceptor.bind(new InetSocketAddress(50003));
+		System.out.println("服务器在 [" + 50003 + "] 等待连接...");
 	}
 }

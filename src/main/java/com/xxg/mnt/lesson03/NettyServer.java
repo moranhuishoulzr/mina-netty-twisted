@@ -27,9 +27,9 @@ public class NettyServer {
                                 throws Exception {
                             ChannelPipeline pipeline = ch.pipeline();
 
-                            // LengthFieldBasedFrameDecoderæŒ‰è¡Œåˆ†å‰²æ¶ˆæ¯ï¼Œå–å‡ºbody
+                            // LengthFieldBasedFrameDecoder°´ĞĞ·Ö¸îÏûÏ¢£¬È¡³öbody
                             pipeline.addLast(new LengthFieldBasedFrameDecoder(80, 0, 4, 0, 4));
-                            // å†æŒ‰UTF-8ç¼–ç è½¬æˆå­—ç¬¦ä¸²
+                            // ÔÙ°´UTF-8±àÂë×ª³É×Ö·û´®
                             pipeline.addLast(new StringDecoder(CharsetUtil.UTF_8));
 
                             pipeline.addLast(new TcpServerHandler());
@@ -46,7 +46,7 @@ public class NettyServer {
 
 class TcpServerHandler extends ChannelInboundHandlerAdapter {
 
-    // æ¥æ”¶åˆ°æ–°çš„æ•°æ®
+    // ½ÓÊÕµ½ĞÂµÄÊı¾İ
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
 

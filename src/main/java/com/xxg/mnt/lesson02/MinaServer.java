@@ -2,6 +2,7 @@ package com.xxg.mnt.lesson02;
 
 import org.apache.mina.core.service.IoAcceptor;
 import org.apache.mina.core.service.IoHandlerAdapter;
+import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.filter.codec.textline.TextLineCodecFactory;
@@ -20,13 +21,10 @@ public class MinaServer {
         IoAcceptor acceptor = new NioSocketAcceptor();
 
         // 添加一个Filter，用于接收、发送的内容按照"\r\n"分割
-        acceptor.getFilterChain().addLast("codec",
-                new ProtocolCodecFilter(new TextLineCodecFactory(Charset.forName("UTF-8"), "\r\n", "\r\n")));
-
+        acceptor.getFilterChain().addLast("codec", new ProtocolCodecFilter(new TextLineCodecFactory(Charset.forName("UTF-8"), "\r\n", "\r\n")));
         acceptor.setHandler(new TcpServerHandle());
         acceptor.bind(new InetSocketAddress(8080));
     }
-
 }
 
 class TcpServerHandle extends IoHandlerAdapter {
@@ -45,7 +43,6 @@ class TcpServerHandle extends IoHandlerAdapter {
         // 接收客户端的数据，这里接收到的不再是IoBuffer类型，而是字符串
         String line = (String) message;
         System.out.println("messageReceived:" + line);
-
     }
 
     @Override
@@ -56,5 +53,10 @@ class TcpServerHandle extends IoHandlerAdapter {
     @Override
     public void sessionClosed(IoSession session) throws Exception {
         System.out.println("sessionClosed");
+    }
+
+    @Override
+    public void sessionIdle(IoSession session, IdleStatus status) throws Exception{
+
     }
 }

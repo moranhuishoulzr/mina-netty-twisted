@@ -33,7 +33,7 @@ public class TLSServerHandler extends IoHandlerAdapter {
 	}
 
 	public void messageSent(IoSession session, Object message) throws Exception {
-		System.out.println("[NIO Server]>> messageSent");
-		System.out.println("[NIO Server messageSent]>> : " + (String) message);
+//		System.out.println("[NIO Server]>> messageSent");
+//		System.out.println("[NIO Server messageSent]>> : " + (String) message);
 	}
 }

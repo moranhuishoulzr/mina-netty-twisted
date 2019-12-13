@@ -22,29 +22,29 @@ public class TcpClient {
             out = socket.getOutputStream();
             in = socket.getInputStream();
 
-            // è¯·æ±‚æœåŠ¡å™¨
-            out.write("ç¬¬ä¸€æ¬¡è¯·æ±‚".getBytes("UTF-8"));
+            // ÇëÇó·şÎñÆ÷
+            out.write("µÚÒ»´ÎÇëÇó".getBytes("UTF-8"));
             out.flush();
 
-            // è·å–æœåŠ¡å™¨å“åº”ï¼Œè¾“å‡º
+            // »ñÈ¡·şÎñÆ÷ÏìÓ¦£¬Êä³ö
             byte[] byteArray = new byte[1024];
             int length = in.read(byteArray);
             System.out.println(new String(byteArray, 0, length, "UTF-8"));
 
             Thread.sleep(5000);
 
-            // å†æ¬¡è¯·æ±‚æœåŠ¡å™¨
-            out.write("ç¬¬äºŒæ¬¡è¯·æ±‚".getBytes("UTF-8"));
+            // ÔÙ´ÎÇëÇó·şÎñÆ÷
+            out.write("µÚ¶ş´ÎÇëÇó".getBytes("UTF-8"));
             out.flush();
 
-            // å†æ¬¡è·å–æœåŠ¡å™¨å“åº”ï¼Œè¾“å‡º
+            // ÔÙ´Î»ñÈ¡·şÎñÆ÷ÏìÓ¦£¬Êä³ö
             byteArray = new byte[1024];
             length = in.read(byteArray);
             System.out.println(new String(byteArray, 0, length, "UTF-8"));
 
 
         } finally {
-            // å…³é—­è¿æ¥
+            // ¹Ø±ÕÁ¬½Ó
             in.close();
             out.close();
             socket.close();

@@ -66,8 +66,6 @@ public class MinaServer {
         SSLContext sslContext = SSLContext.getInstance("TLS");
         sslContext.init(kmf.getKeyManagers(), null, null);
 
-
-
         IoAcceptor acceptor = new NioSocketAcceptor();
         DefaultIoFilterChainBuilder chain = acceptor.getFilterChain();
         chain.addLast("ssl", new SslFilter(sslContext));  // SslFilter + HttpServerCodec实现HTTPS

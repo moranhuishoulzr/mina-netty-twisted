@@ -15,19 +15,19 @@ public class TcpClient {
         try {
             socket = new Socket("localhost", 8080);
             out = new DataOutputStream(socket.getOutputStream());
-            // è¯·æ±‚æœåŠ¡å™¨
-            String data1 = "ç‰›é¡¿";
+            // ÇëÇó·şÎñÆ÷
+            String data1 = "Å£¶Ù";
             byte[] outputBytes1 = data1.getBytes("UTF-8");
             out.writeInt(outputBytes1.length); // write header
             out.write(outputBytes1); // write body
-            String data2 = "çˆ±å› æ–¯å¦";
+            String data2 = "°®ÒòË¹Ì¹";
             byte[] outputBytes2 = data2.getBytes("UTF-8");
             out.writeInt(outputBytes2.length); // write header
             out.write(outputBytes2); // write body
             out.flush();
 
         } finally {
-            // å…³é—­è¿æ¥
+            // ¹Ø±ÕÁ¬½Ó
             out.close();
             socket.close();
         }

@@ -28,10 +28,10 @@ import java.security.spec.PKCS8EncodedKeySpec;
 public class MinaServer {
 
     public static void main(String[] args) throws Exception {
-        String certPath = "cert.crt";  // 璇佷功
-        String privateKeyPath = "private.der";  // 绉侀挜
+        String certPath = "F:\\code+ziliao\\《MINA、Netty、Twisted一起学》系列教程源码\\mina-netty-twisted\\src\\main\\resources\\cert.crt";  // 证书
+        String privateKeyPath = "F:\\code+ziliao\\《MINA、Netty、Twisted一起学》系列教程源码\\mina-netty-twisted\\src\\main\\resources\\private.der";  // 私钥
 
-        // 璇佷功
+        // 证书
         // https://docs.oracle.com/javase/7/docs/api/java/security/cert/X509Certificate.html
         InputStream inStream = null;
         Certificate certificate = null;
@@ -45,7 +45,7 @@ public class MinaServer {
             }
         }
 
-        // 绉侀挜
+        // 私钥
         PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(Files.readAllBytes(new File(privateKeyPath).toPath()));
         PrivateKey privateKey = KeyFactory.getInstance("RSA").generatePrivate(keySpec);
 
@@ -62,7 +62,7 @@ public class MinaServer {
 
         IoAcceptor acceptor = new NioSocketAcceptor();
         DefaultIoFilterChainBuilder chain = acceptor.getFilterChain();
-        chain.addLast("ssl", new SslFilter(sslContext));  // SslFilter闇�瑕佹斁鍦ㄦ渶鍓嶉潰
+        chain.addLast("ssl", new SslFilter(sslContext));  // SslFilter需要放在最前面
         chain.addLast("codec", new ProtocolCodecFilter(new TextLineCodecFactory(Charset.forName("UTF-8"), "\r\n", "\r\n")));
         acceptor.setHandler(new TcpServerHandle());
         acceptor.bind(new InetSocketAddress(8080));
